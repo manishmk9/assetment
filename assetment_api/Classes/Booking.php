@@ -56,7 +56,8 @@ class Booking
     { 
       if($this->seat_update($total_seat_with_booking_seat) === true) //funcation called for seat update in train table
       {
-        return $response;
+        $seat_number =  $this->seat_plan($seat_avail,$this->value_Array['book_seat']);
+        return $seat_number;
       }
     } 
 
@@ -110,6 +111,26 @@ class Booking
     if($responsedata == 1 )
     {
       return true;
+    }
+  }
+
+  public function seat_plan($total_book,$current_seat)
+  { 
+    $total_book_seat = null;
+    $seat_end = null;
+    $seat_start = null;
+    if($current_seat <= 1)
+    {
+      $total_book_seat = $total_book;
+      $seat_start = $total_book_seat;
+      return "Seat number is S".$seat_start." in 12624 train no ";
+    }
+    else
+    {
+      $total_book_seat = $total_book;
+      $seat_start = $total_book_seat+1;
+      $seat_end = $total_book_seat+$current_seat;
+      return "Seat number is S".$seat_start." to  S".$seat_end." in 12624 train no.";
     }
   }
 }
