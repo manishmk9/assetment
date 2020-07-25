@@ -114,7 +114,7 @@ class Booking
     }
   }
 
-  public function seat_plan($total_book,$current_seat)
+  public function seat_plan($total_book,$current_seat) //function for booking seat number
   { 
     $total_book_seat = null;
     $seat_end = null;
@@ -122,15 +122,15 @@ class Booking
     if($current_seat <= 1)
     {
       $total_book_seat = $total_book;
-      $seat_start = $total_book_seat;
-      return "Seat number is S".$seat_start." in 12624 train no ";
+      $seat_start = $total_book_seat+1;
+      return $this->db->responsehandler(1,array("Seat number is S".$seat_start." in 12624 train no "),'Reservation successfull');
     }
     else
     {
       $total_book_seat = $total_book;
       $seat_start = $total_book_seat+1;
       $seat_end = $total_book_seat+$current_seat;
-      return "Seat number is S".$seat_start." to  S".$seat_end." in 12624 train no.";
+      return $this->db->responsehandler(1,"Seat number is S".$seat_start." to  S".$seat_end." in 12624 train no.",'Reservation successfull');
     }
   }
 }
